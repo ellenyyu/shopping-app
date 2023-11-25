@@ -38,9 +38,9 @@ if adv_select == 'enter a channel url':
 	with st.expander('Options'):
 		step_select = int(st.text_input('enter a customized step size', value = '10'))
 		max_select = int(st.text_input('enter a customized number of returns', value = '999999999'))
-		format_string = '%m-%d-%Y'
-		start_select = datetime.strptime(st.text_input('enter a customized start time in mm/dd/yyy format', value = datetime.min.strftime('%m-%d-%Y')), format_string)
-		end_select = datetime.strptime(st.text_input('enter a customized end time in mm/dd/yyyy format', value = datetime.max.strftime('%m-%d-%Y')), format_string)
+		format_string = '%m/%d/%Y'
+		start_select = datetime.strptime(st.text_input('enter a customized start time in mm/dd/yyyy format', value = '01/01/2023'), format_string)
+		end_select = datetime.strptime(st.text_input('enter a customized end time in mm/dd/yyyy format', value = '12/31/2023'), format_string)
 
 	if len(channel_url) > 0: 
 
@@ -83,7 +83,6 @@ if adv_select == 'enter a search string':
 			options=['relevance', 'searchSortUnspecified', 'date', 'rating', 'viewCount','title', 'videoCount'], index=0)
 		step_select = int(st.text_input('enter a customized step size', value = '10'))
 		max_select = int(st.text_input('enter a customized number of returns', value = '999999999'))
-		format_string = '%m-%d-%Y'
 
 	if len(search_string) > 0: 
 
