@@ -4,7 +4,10 @@ Additional things to implement:
 - Integrate LTK, Instagram, Google, Pinterest
 - Use cases: for style discovery, for brand discovery, for product recommendations
 - return images instead of opening new browser windows
+- troubleshoot empty titles throwing thumbnail section off
+- make it work on mobile
 '''
+
 import streamlit as st 
 from datetime import datetime
 from channel_url import get_channel_id_from_url , get_video_data
