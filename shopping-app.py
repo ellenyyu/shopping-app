@@ -3,23 +3,24 @@ Additional things to implement:
 - Filter out Twitter, Youtube aka social media links
 - Integrate LTK, Instagram, Google, Pinterest
 - Use cases: for style discovery, for brand discovery, for product recommendations
+- return images instead of opening new browser windows
 '''
 import streamlit as st 
 from datetime import datetime
 from channel_url import get_channel_id_from_url , get_video_data
 from search_string import search_youtube_videos
-from app_utils import reset_start_stop
+from app_utils import reset_start_stop, generate_open_urls_script
 import pandas as pd
-import webbrowser
-import os
-#from dotenv import load_dotenv
+#import webbrowser
+#import os 
+#from dotenv import load_dotenv 
+import streamlit.components.v1 as components
 
-#load_dotenv()
-
-#API_KEY = os.getenv('YOUTUBE_API_KEY_1')
-API_KEY = st.secrets['YOUTUBE_API_KEY']
+#load_dotenv() 
 
 st.set_page_config(layout="wide")
+
+API_KEY = st.secrets['YOUTUBE_API_KEY']
 
 with st.expander('(Optional) Enter your Youtube API Key'):
 	api_key = st.text_input('Youtube API Key', value = None, label_visibility='collapsed')
@@ -73,7 +74,9 @@ if adv_select == 'enter a channel url':
 			# st.write('stop', st.session_state.stop)
 
 			for link in df.links.explode().drop_duplicates()[st.session_state.start : st.session_state.stop]:     
-			    webbrowser.open(link)
+			    #webbrowser.open(link)
+			    html_script = generate_open_urls_script(link)
+			    components.html(html_script)
 
 if adv_select == 'enter a search string': 
 
@@ -137,7 +140,9 @@ if adv_select == 'enter a search string':
 			# st.write('stop', st.session_state.stop)
 
 			for link in df.links.explode().drop_duplicates()[st.session_state.start : st.session_state.stop]:     
-			    webbrowser.open(link)
+			    #webbrowser.open(link)
+			    html_script = generate_open_urls_script(link)
+			    components.html(html_script)
 
 			
 			
