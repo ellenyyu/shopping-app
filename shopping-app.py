@@ -12,11 +12,12 @@ from app_utils import reset_start_stop
 import pandas as pd
 import webbrowser
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
-load_dotenv()
+#load_dotenv()
 
-API_KEY = os.getenv('YOUTUBE_API_KEY_1')
+#API_KEY = os.getenv('YOUTUBE_API_KEY_1')
+API_KEY = st.secrets['YOUTUBE_API_KEY']
 
 st.set_page_config(layout="wide")
 
