@@ -32,7 +32,7 @@ def get_video_details(_youtube, video_ids):
 
 @st.cache_data
 def search_youtube_videos(api_key, search_term, return_by, max_results):
-    youtube = googleapiclient.discovery.build("youtube", "v3", developerKey=api_key)
+    youtube = googleapiclient.discovery.build("youtube", "v3", developerKey=api_key, http=http)
 
     request = youtube.search().list(
         q=search_term,

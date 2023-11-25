@@ -35,7 +35,7 @@ def extract_links(text):
 
 @st.cache_data
 def get_video_data(api_key, channel_id, start_date, end_date, max_results = 1000):
-    youtube = build("youtube", "v3", developerKey=api_key)
+    youtube = build("youtube", "v3", developerKey=api_key, http=http)
 
     # Get the uploads playlist ID for the channel
     playlist_response = youtube.channels().list(
