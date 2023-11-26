@@ -12,7 +12,7 @@ import streamlit as st
 from datetime import datetime
 from channel_url import get_channel_id_from_url , get_video_data
 from search_string import search_youtube_videos
-from save_images import get_image_urls, download_file
+from save_images import get_image_urls, zip_images
 from app_utils import reset_start_stop, generate_open_urls_script
 import pandas as pd
 #import webbrowser
@@ -201,9 +201,7 @@ with seller_tab:
             df = df.iloc[images_to_download]
             #st.write(df)
 
-        download = st.button(f'Download {df.shape[0]} images')
+        href = zip_images(df.links.tolist())
 		
-        if download:
-            for link in df.links: 
-                download_file(link, SAVE_DIRECTORY)
-            st.write(f'Check the {SAVE_DIRECTORY} folder')
+        st.markdown(f'<a href="{href}" download="downloaded_images.zip"><button>Download {df.shape[0]} images</button></a>', unsafe_allow_html=True)
+

@@ -1,7 +1,9 @@
 import streamlit as st
 from googleapiclient.discovery import build
 import requests
-import os
+from io import BytesIO
+import base64
+import zipfile
 
 @st.cache_data
 def get_image_urls(api_key, cx, search_term, num_results):
@@ -21,21 +23,23 @@ def get_image_urls(api_key, cx, search_term, num_results):
 
     return image_urls[:num_results]
 
-def download_file(url, save_directory):
-    # Create the save directory if it doesn't exist
-    os.makedirs(save_directory, exist_ok=True)
 
-    # Extract the file name from the URL
-    file_name = os.path.join(save_directory, url.split("/")[-1])
-
-    # Download the file
-    response = requests.get(url)
+def zip_images(image_urls):
     
-    # Check if the request was successful (status code 200)
-    if response.status_code == 200:
-        # Save the file to the specified directory
-        with open(file_name, 'wb') as f:
-            f.write(response.content)
-        print(f"File downloaded successfully: {file_name}")
-    else:
-        print(f"Failed to download file. Status code: {response.status_code}")
+    zip_buffer = BytesIO()
+
+    with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+        for url in image_urls:
+            file_name = url.split("/")[-1]
+            response = requests.get(url)
+
+            if response.status_code == 200:
+                zip_file.writestr(f"{file_name}.jpg", response.content)
+            else:
+                st.warning(f"Failed to download image {file_name} (Status code: {response.status_code})")
+
+    zip_data = zip_buffer.getvalue()
+    zip_b64 = base64.b64encode(zip_data).decode()
+    href = f'data:application/zip;base64,{zip_b64}'
+    
+    return href
