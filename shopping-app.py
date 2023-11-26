@@ -79,20 +79,20 @@ with buyer_tab:
 				with col1: 
 					for row in df.iloc[::3].itertuples():
 						st.image(row[4], use_column_width=True)
-						remove = st.checkbox(f"remove {row[1]}")
+						remove = st.checkbox(f"remove {row[1]}", key=f'{row[0]}.{row[1]}')
 						if remove: 
 							videos_to_keep.remove(row.Index)
 		
 				with col2: 
 					for row in df.iloc[1::3].itertuples():
 						st.image(row[4], use_column_width=True)
-						remove = st.checkbox(f"remove {row[1]}")
+						remove = st.checkbox(f"remove {row[1]}", key=f'{row[0]}.{row[1]}')
 						if remove: 
 							videos_to_keep.remove(row.Index)
 				with col3: 
 					for row in df.iloc[2::3].itertuples():
 						st.image(row[4], use_column_width=True)
-						remove = st.checkbox(f"remove {row[1]}")
+						remove = st.checkbox(f"remove {row[1]}", key=f'{row[0]}.{row[1]}')
 						if remove: 
 							videos_to_keep.remove(row.Index)
 				#st.write('second', videos_to_keep)
@@ -183,19 +183,19 @@ with seller_tab:
             with col1: 
                 for row in df.iloc[::3].itertuples():
                     st.image(row[1], use_column_width=True)
-                    download = st.checkbox(f"download {row[1]}")
+                    download = st.checkbox('download image', key=f'{row[0]}.{row[1]}')
                     if download: 
                         images_to_download.append(row.Index)
             with col2: 
                 for row in df.iloc[1::3].itertuples():
                     st.image(row[1], use_column_width=True)
-                    download = st.checkbox(f"download {row[1]}")
+                    download = st.checkbox('download image', key=f'{row[0]}.{row[1]}')
                     if download: 
                         images_to_download.append(row.Index)
             with col3: 
                 for row in df.iloc[2::3].itertuples():
                     st.image(row[1], use_column_width=True)
-                    download = st.checkbox(f"download {row[1]}")
+                    download = st.checkbox('download image', key=f'{row[0]}.{row[1]}')
                     if download: 
                         images_to_download.append(row.Index)
             df = df.iloc[images_to_download]
