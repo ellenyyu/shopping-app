@@ -120,7 +120,7 @@ with buyer_tab:
 
 	if adv_select == 'enter a channel url': 
 
-		channel_url = st.text_input('Please enter a channel url', value = 'https://www.youtube.com/@HelloDavid', on_change=reset_start_stop)
+		channel_url = st.text_input('Please enter a channel url', value = 'https://www.youtube.com/@LydiaJaneTomlinson', on_change=reset_start_stop)
 
 		with st.expander('Options'):
 			step_select = int(st.text_input('enter a customized step size', value = '10'))
